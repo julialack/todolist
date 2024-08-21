@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Hantering</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Hantera Lista</h2>
+        <input type="text" id="itemInput" placeholder="Skriv ett objekt här">
+        <button id="addButton">Lägg till</button>
+
+        <ul id="itemList">
+            <!-- Listan kommer läggas in här -->
+        </ul>
+    </div>
+
+    <script>
+        // Hämta DOM-elementen
+        const itemInput = document.getElementById('itemInput');
+        const addButton = document.getElementById('addButton');
+        const itemList = document.getElementById('itemList');
+
+        // Lägg till objekt
+        addButton.addEventListener('click', function() {
+            const itemText = itemInput.value.trim();
+
+            if (itemText !== '') {
+                //nytt listobjekt
+                const listItem = document.createElement('li');
+                listItem.textContent = itemText;
+                listItem.className = 'item';
+
+                // klickhändelse
+                listItem.addEventListener('click', function() {
+                    itemList.removeChild(listItem);
+                });
+
+                // Lägg till det nya objektet
+                itemList.appendChild(listItem);
+
+                // Töm input-fältet
+                itemInput.value = '';
+            }
+        });
+
+        // klicka enter för att lägga till 
+        itemInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                addButton.click();
+            }
+        });
+    </script>
+</body>
+</html>
